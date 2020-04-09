@@ -8,13 +8,16 @@ $senha = filter_input(INPUT_POST, 'senha', FILTER_VALIDATE_INT);
 
 if($nome && $senha && $email){
 
+    $expiracao = time() + (86400 * 30);
+    setcookie('nome', $nome, $expiracao);
+
     echo 'NOME: '. $nome ."<br/>";
     echo 'EMAIL: '. $email."<br>";
     echo 'SENHA: '. $senha;
 
 } else {
     //echo 'NÃO EVIOU';
-   // $_SESSION['aviso'] = "Preencha os itens corretamente!";
+    $_SESSION['aviso'] = "Preencha os itens corretamente!";
 
     header("Location: index.php");
     exit;
